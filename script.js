@@ -34,3 +34,8 @@ Card.prototype.create = function(){
     var cardText = document.createTextNode(this.firstName);
     cardArea.appendChild(cardText);
 };
+
+for (var i=0; i<devs.length; i++){
+    var newCard = new Card(devs[i].firstName,devs[i].lastName,devs[i].role,devs[i].email,devs[i].phone);
+    newCard.create();
+};
