@@ -29,3 +29,8 @@ function Card(firstName,lastName,role,email,phone){
     this.email = email;
     this.phone = phone;
 };
+
+Card.prototype.create = function(){
+    var cardText = document.createTextNode(this.firstName);
+    cardArea.appendChild(cardText);
+};
