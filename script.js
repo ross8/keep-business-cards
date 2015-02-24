@@ -31,6 +31,9 @@ function Card(firstName,lastName,role,email,phone){
 };
 
 Card.prototype.create = function(){
+    var cardContainer = document.createElement('div');
+    cardContainer.setAttribute('class','card-container');
+ 
     var cardText = document.createTextNode(this.firstName);
     cardArea.appendChild(cardText);
 };
