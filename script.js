@@ -19,3 +19,13 @@ var devs = [
     email: 'ryan@keep.com'
   }
 ]
+
+var cardArea = document.getElementById('card-area');
+
+function Card(firstName,lastName,role,email,phone){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.role = role;
+    this.email = email;
+    this.phone = phone;
+};
