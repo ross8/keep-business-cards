@@ -40,74 +40,39 @@ Card.prototype.create = function(){
 
     var cardArea = document.getElementById('card-area');
     
-    //Add bootstrap column for card
+    //Array containing card components
     
-    var cardCol = document.createElement('div');
-    cardCol.setAttribute('class','col-xs-12 col-md-4');
-    cardArea.appendChild(cardCol);
+    var components = [
+        [1,'col-xs-12 col-md-4','card-col',,'card-area'],
+        [1,'card-container col-xs-12','card-container',,'card-col'],
+        [1,'left-container col-xs-6','left-container',,'card-container'],
+        [1,'right-container col-xs-6','right-container',,'card-container'],
+        [1,'logo-container center-block','logo-container',,'left-container'],
+        [1,'info-container','info-container',,'right-container'],
+        [1,'name-line','name-line',,'info-container'],
+        [2,,,this.firstName + " " + this.lastName,'name-line'],
+        [1,'role-line','role-line',,'info-container'],
+        [2,,,this.role,'role-line'],
+        [1,'email-line','email-line',,'info-container'],
+        [2,,,this.email,'email-line'],
+        [1,'phone-line','phone-line',,'info-container'],
+        [2,,,this.phone,'phone-line']
+    ];
     
-    //Add outer containing div for card
+    //Loop through components array to add components to card
     
-    var cardContainer = document.createElement('div');
-    cardContainer.setAttribute('class','card-container col-xs-12');
-    cardCol.appendChild(cardContainer);
-    
-    //Add div for left half of card
-    
-    var leftContainer = document.createElement('div');
-    leftContainer.setAttribute('class','left-container col-xs-6');
-    cardContainer.appendChild(leftContainer);
-    
-    //Add div for logo
-    
-    var logoContainer = document.createElement('div');
-    logoContainer.setAttribute('class','logo-container center-block');
-    leftContainer.appendChild(logoContainer);
-    
-    //Add div for right half of card
-    
-    var rightContainer = document.createElement('div');
-    rightContainer.setAttribute('class','right-container col-xs-6');
-    cardContainer.appendChild(rightContainer);
-    
-    //Add div for info
-    
-    var infoContainer = document.createElement('div');
-    infoContainer.setAttribute('class','info-container');
-    rightContainer.appendChild(infoContainer);
-    
-    //Add name to card
-    
-    var nameLine = document.createElement('div');
-    nameLine.setAttribute('class','name-line');
-    var nameLineText = document.createTextNode(this.firstName + " " + this.lastName);
-    nameLine.appendChild(nameLineText);
-    infoContainer.appendChild(nameLine);
-    
-    //Add role to card
-    
-    var roleLine = document.createElement('div');
-    roleLine.setAttribute('class','role-line');
-    var roleLineText = document.createTextNode(this.role);
-    roleLine.appendChild(roleLineText);
-    infoContainer.appendChild(roleLine);
-    
-    //Add email to card
-    
-    var emailLine = document.createElement('div');
-    emailLine.setAttribute('class','email-line');
-    var emailLineText = document.createTextNode(this.email);
-    emailLine.appendChild(emailLineText);
-    infoContainer.appendChild(emailLine);
-    
-    //Check if phone number is given. If so, add to card
-    
-    if(!!this.phone){
-        var phoneLine = document.createElement('div');
-        phoneLine.setAttribute('class','phone-line');
-        var phoneLineText = document.createTextNode(this.phone);
-        phoneLine.appendChild(phoneLineText);
-        infoContainer.appendChild(phoneLine);
+    for(var i=0; i < components.length; i++){
+        if(components[i][0] == 1){
+            var element = document.createElement('div');
+            element.setAttribute('class',components[i][1]);
+            element.setAttribute('id',components[i][2]);
+            var location = document.getElementById(components[i][4]);
+            location.appendChild(element);
+        }else if(components[i][0] == 2){
+            var element = document.createTextNode(components[i][3]);
+            var location = document.getElementById(components[i][4]);
+            location.appendChild(element);
+        };
     };
     
 };
