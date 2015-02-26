@@ -22,10 +22,6 @@ var devs = [
   }
 ]
 
-//Store card display area
-
-var cardArea = document.getElementById('card-area');
-
 //Card object constructor
 
 function Card(firstName,lastName,role,email,phone){
@@ -40,50 +36,81 @@ function Card(firstName,lastName,role,email,phone){
 
 Card.prototype.create = function(){
     
+    //Store card display area
+
+    var cardArea = document.getElementById('card-area');
     
-    //Add containing div for card
+    //Add bootstrap column for card
+    
+    var cardCol = document.createElement('div');
+    cardCol.setAttribute('class','col-xs-12 col-md-4');
+    cardArea.appendChild(cardCol);
+    
+    //Add outer containing div for card
+    
     var cardContainer = document.createElement('div');
-    cardContainer.setAttribute('class','card-container');
-    cardArea.appendChild(cardContainer);
+    cardContainer.setAttribute('class','card-container col-xs-12');
+    cardCol.appendChild(cardContainer);
+    
+    //Add div for left half of card
+    
+    var leftContainer = document.createElement('div');
+    leftContainer.setAttribute('class','left-container col-xs-6');
+    cardContainer.appendChild(leftContainer);
     
     //Add div for logo
+    
     var logoContainer = document.createElement('div');
-    logoContainer.setAttribute('class','logo-container');
-    cardContainer.appendChild(logoContainer);
+    logoContainer.setAttribute('class','logo-container center-block');
+    leftContainer.appendChild(logoContainer);
+    
+    //Add div for right half of card
+    
+    var rightContainer = document.createElement('div');
+    rightContainer.setAttribute('class','right-container col-xs-6');
+    cardContainer.appendChild(rightContainer);
+    
+    //Add div for info
+    
+    var infoContainer = document.createElement('div');
+    infoContainer.setAttribute('class','info-container');
+    rightContainer.appendChild(infoContainer);
     
     //Add name to card
+    
     var nameLine = document.createElement('div');
     nameLine.setAttribute('class','name-line');
     var nameLineText = document.createTextNode(this.firstName + " " + this.lastName);
     nameLine.appendChild(nameLineText);
-    cardContainer.appendChild(nameLine);
+    infoContainer.appendChild(nameLine);
     
     //Add role to card
+    
     var roleLine = document.createElement('div');
     roleLine.setAttribute('class','role-line');
     var roleLineText = document.createTextNode(this.role);
     roleLine.appendChild(roleLineText);
-    cardContainer.appendChild(roleLine);
+    infoContainer.appendChild(roleLine);
     
     //Add email to card
+    
     var emailLine = document.createElement('div');
     emailLine.setAttribute('class','email-line');
     var emailLineText = document.createTextNode(this.email);
     emailLine.appendChild(emailLineText);
-    cardContainer.appendChild(emailLine);
+    infoContainer.appendChild(emailLine);
     
-    //Check if phone is given. If so, add to card
+    //Check if phone number is given. If so, add to card
+    
     if(!!this.phone){
         var phoneLine = document.createElement('div');
         phoneLine.setAttribute('class','phone-line');
         var phoneLineText = document.createTextNode(this.phone);
         phoneLine.appendChild(phoneLineText);
-        cardContainer.appendChild(phoneLine);
+        infoContainer.appendChild(phoneLine);
     };
+    
 };
-
-//Arrray to store card objects for access later
-var cards = [];
 
 //Loop to create new card object for each object in devs array
 
@@ -98,8 +125,5 @@ for (var i=0; i<devs.length; i++){
     );
     
     newCard.create();
-    
-    //Store newCard in array in case we need to access later
-    
-    cards[i] = newCard;
+
 };
