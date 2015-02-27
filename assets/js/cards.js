@@ -24,55 +24,65 @@ var devs = [
 
 //Card object constructor
 
-function Card(firstName,lastName,role,email,phone){
+function Card(firstName,lastName,role,email,phone,id){
     this.firstName = firstName;
     this.lastName = lastName;
     this.role = role;
     this.email = email;
     this.phone = phone;
+    this.id = id;
+    
+    //Array containing card components
+    
+  
+    
+    //[component type, component class, component id, location to be inserted]
+    
+    this.components = [
+        ['element','col-xs-12 col-md-4','card-col' + this.id,,'card-area'],
+        ['element','card-container col-xs-12','card-container' + this.id,,'card-col' + this.id],
+        ['element','left-container col-xs-6','left-container' + this.id,,'card-container' + this.id],
+        ['element','right-container col-xs-6','right-container' + this.id,,'card-container' + this.id],
+        ['element','logo-container center-block','logo-container' + this.id,,'left-container' + this.id],
+        ['element','info-container','info-container' + this.id,,'right-container' + this.id],
+        ['element','name-line','name-line' + this.id,,'info-container' + this.id],
+        ['text',,,this.firstName + " " + this.lastName,'name-line' + this.id],
+        ['element','role-line','role-line' + this.id,,'info-container' + this.id],
+        ['text',,,this.role,'role-line' +this.id],
+        ['element','email-line','email-line' + this.id,,'info-container' + this.id],
+        ['text',,,this.email,'email-line' +this.id],
+        ['element','phone-line','phone-line' + this.id,,'info-container' + this.id],
+        ['phone',,,this.phone,'phone-line' + this.id]
+    ];
 };
 
-//Method to print cards to card display area
+//Method to build cards to append to DOM
 
-Card.prototype.create = function(){
+Card.prototype.build = function(){
     
     //Store card display area
 
     var cardArea = document.getElementById('card-area');
     
-    //Array containing card components
-    
-    var components = [
-        [1,'col-xs-12 col-md-4','card-col',,'card-area'],
-        [1,'card-container col-xs-12','card-container',,'card-col'],
-        [1,'left-container col-xs-6','left-container',,'card-container'],
-        [1,'right-container col-xs-6','right-container',,'card-container'],
-        [1,'logo-container center-block','logo-container',,'left-container'],
-        [1,'info-container','info-container',,'right-container'],
-        [1,'name-line','name-line',,'info-container'],
-        [2,,,this.firstName + " " + this.lastName,'name-line'],
-        [1,'role-line','role-line',,'info-container'],
-        [2,,,this.role,'role-line'],
-        [1,'email-line','email-line',,'info-container'],
-        [2,,,this.email,'email-line'],
-        [1,'phone-line','phone-line',,'info-container'],
-        [2,,,this.phone,'phone-line']
-    ];
-    
     //Loop through components array to add components to card
     
-    for(var i=0; i < components.length; i++){
-        if(components[i][0] == 1){
-            var element = document.createElement('div');
-            element.setAttribute('class',components[i][1]);
-            element.setAttribute('id',components[i][2]);
-            var location = document.getElementById(components[i][4]);
-            location.appendChild(element);
-        }else if(components[i][0] == 2){
-            var element = document.createTextNode(components[i][3]);
-            var location = document.getElementById(components[i][4]);
-            location.appendChild(element);
+    for(var i=0; i < this.components.length; i++){
+        var type = this.components[i][0];
+        var print = function(){    
+            if(type == 'element'){
+                var element = document.createElement('div');
+                element.setAttribute('class',this.components[i][1]);
+                element.setAttribute('id',this.components[i][2]);
+                var location = document.getElementById(this.components[i][4]);
+                location.appendChild(element);
+            }else if(type == 'text'){
+                var element = document.createTextNode(this.components[i][3]);
+                var location = document.getElementById(this.components[i][4]);
+                location.appendChild(element);
+            };
         };
+        
+        print();
     };
     
 };
@@ -81,14 +91,17 @@ Card.prototype.create = function(){
 
 for (var i=0; i<devs.length; i++){
     
+    //create new card object
+    
     var newCard = new Card(
         devs[i].firstName,
         devs[i].lastName,
         devs[i].role,
         devs[i].email,
-        devs[i].phone
+        devs[i].phone,
+        i
     );
     
-    newCard.create();
+    newCard.build();
 
 };
