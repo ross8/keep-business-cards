@@ -20,7 +20,7 @@
 #header-text{
     font-size: 18px;
     font-weight: 500;
-    font-family: 'Montserrat Alternates';
+    font-family: 'Montserrat Alternates',helvetica neue,helvetica,arial,sans-serif;
 }
 
 /* CARD STYLES */
@@ -32,16 +32,15 @@
     box-shadow: 0px 0px 33px -10px black;
 }
 
+.card-height{
+    height:110px;
+}
+
 .logo-container{
     height: 26px;
     width: 72px;
     background-image: url(../img/logo.svg);
     background-size: 100% auto;
-}
-
-.left-container,
-.right-container{
-    height:110px;
 }
 
 .name-line{
@@ -53,24 +52,22 @@
     font-size: 13px;
 }
 
+/* MEDIA QUERIES FOR SIZING CARDS RESPONSIVELY */
 
 @media (min-width: 768px){
-    .left-container,
-    .right-container{
+    .card-height{
         height: 145px;
     }
 }
 
 @media (min-width: 992px){
-    .left-container,
-    .right-container{
+    .card-height{
         height: 190px;
     }
 }
 
 @media (min-width: 1200px){
-    .left-container,
-    .right-container{
+    .card-height{
         height: 228px;
     }
 }
